@@ -1,4 +1,5 @@
 // QuickSort (With Code in Python/C++/Java/C). (n.d.). https://www.programiz.com/dsa/quick-sort
+#include <iostream>
 #include <stdio.h>
 
 // Otra funcion a paralelizar

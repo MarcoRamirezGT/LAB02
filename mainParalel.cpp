@@ -1,9 +1,11 @@
+#include <iostream>
 #include "randomNumbers.c"
-#include "quicksort.c"
+#include "quicksortParalel.cpp"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
+#include <omp.h>
 
 int main()
 {
@@ -22,7 +24,7 @@ int main()
     else
     {
         int data[n];
-        int numbers[n];
+        int *numbers = (int*) malloc(n * sizeof(int));
         // For para almacenar los numeros en un array
         // Otro for para poder paralelizar
         for (int i = 0; i < n; i++)
@@ -36,7 +38,20 @@ int main()
             printf("%d ", data[i]);
         }
         int da = sizeof(data) / sizeof(data[0]);
-        quickSort(numbers, 0, da - 1);
+
+
+        // Chequear el tiempo paralelo
+        double t_init_paralelo = omp_get_wtime();
+        #pragma omp parallel num_threads(10)
+        {
+            // Create a single task to sort the entire array
+            #pragma omp single nowait
+            quickSort(numbers, 0, da - 1);
+        }
+        double t_fin_paralelo = omp_get_wtime();
+        double delta_paralelo = t_fin_paralelo - t_init_paralelo;
+    
+
         printf("\nArray ordenado por Quicksort: \n");
         printArray(numbers, da);
         // Guardar numeros ya ordenados
@@ -61,5 +76,7 @@ int main()
             fclose(filePointer);
             printf("Numeros ordenados guardados correctamente en el archivo *sortedNumbers.txt*\n");
         }
+        // Mostrar el delta paralelo
+        printf("Delta paralelo = %f  \n", delta_paralelo);
     }
 }
