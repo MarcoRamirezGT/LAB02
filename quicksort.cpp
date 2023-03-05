@@ -2,7 +2,6 @@
 #include <iostream>
 #include <stdio.h>
 
-// Otra funcion a paralelizar
 //  function to swap elements
 void swap(int *a, int *b)
 {

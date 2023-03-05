@@ -24,9 +24,9 @@ int main()
     else
     {
         int data[n];
-        int *numbers = (int*) malloc(n * sizeof(int));
+        int *numbers = (int *)malloc(n * sizeof(int));
         // For para almacenar los numeros en un array
-        // Otro for para poder paralelizar
+
         for (int i = 0; i < n; i++)
         {
             fscanf(f, "%d,", &data[i]);
@@ -39,18 +39,16 @@ int main()
         }
         int da = sizeof(data) / sizeof(data[0]);
 
-
         // Chequear el tiempo paralelo
         double t_init_paralelo = omp_get_wtime();
-        #pragma omp parallel num_threads(10)
+#pragma omp parallel num_threads(10)
         {
-            // Create a single task to sort the entire array
-            #pragma omp single nowait
+// Create a single task to sort the entire array
+#pragma omp single nowait
             quickSort(numbers, 0, da - 1);
         }
         double t_fin_paralelo = omp_get_wtime();
         double delta_paralelo = t_fin_paralelo - t_init_paralelo;
-    
 
         printf("\nArray ordenado por Quicksort: \n");
         printArray(numbers, da);
@@ -63,7 +61,7 @@ int main()
         }
         else
         {
-            // For para parelilizar, se me ocurre pragma parallel for
+
             for (int i = 0; i < n; i++)
             {
                 if (i == n - 1)

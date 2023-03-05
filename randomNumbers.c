@@ -20,8 +20,8 @@ int randomNumbers(int n)
     else
     {
         srand((unsigned)time(&t));
-        // Estas es una de las principales funciones para parelelizar
-        // Esta for generara numeros aleatorios del 0 al 100
+
+        // Este for generara numeros aleatorios del 0 al 100
         for (i = 0; i < n; i++)
         {
             if (i == n - 1)

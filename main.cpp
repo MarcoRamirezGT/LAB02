@@ -26,7 +26,6 @@ int main()
         int data[n];
         int numbers[n];
         // For para almacenar los numeros en un array
-        // Otro for para poder paralelizar
         for (int i = 0; i < n; i++)
         {
             fscanf(f, "%d,", &data[i]);
@@ -39,13 +38,11 @@ int main()
         }
         int da = sizeof(data) / sizeof(data[0]);
 
-        
         // Chequear el tiempo secuencial
         double t_init_secuencial = omp_get_wtime();
         quickSort(numbers, 0, da - 1);
         double t_fin_secuencial = omp_get_wtime();
         double delta_secuencial = t_fin_secuencial - t_init_secuencial;
-
 
         printf("\nArray ordenado por Quicksort: \n");
         printArray(numbers, da);
@@ -58,7 +55,7 @@ int main()
         }
         else
         {
-            // For para parelilizar, se me ocurre pragma parallel for
+
             for (int i = 0; i < n; i++)
             {
                 if (i == n - 1)
