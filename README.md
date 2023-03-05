@@ -2,5 +2,5 @@
 Laboratorio 2: Open MP, usando quicksort y fileHandler
 
  ```sh
-  g++ -o main .\main.c -fopenmp
+  g++ -o main .\main.cpp -fopenmp
   ```
